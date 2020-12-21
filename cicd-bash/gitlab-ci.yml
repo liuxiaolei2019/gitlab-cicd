@@ -1,0 +1,75 @@
+variables:
+  #gitlab地址(master)
+  git_remote_url: "git@192.168.1.24:nbmetro/code/code_itps/itps.git"
+  #HARBOR服务器地址
+  HARBOR_URL: "harbor.lzgdjt.com:47038"
+  #rancher访问地址
+  RANCHER_URL: "192.168.1.230"
+  #rancher令牌
+  CATTLE_ACCESS_KEY: "token-24j5v"
+  #rancher秘钥
+  CATTLE_SECRET_KEY: "dmt4fzv95v5xz6bjs88rh8jksvwvfmmmqv67kz5tjgn5wl2j7gkq44"
+  #项目程序的命名空间
+  NAME_SPACE: "old-nb-itps"
+  #镜像库凭证名称
+  imagePullSecrets_NAME: "lzharbor-nbitps"
+  #rancher项目ID，通常在项目的url中获取
+  RANCHER_PROJECT_ID: "c-l2ccp:p-hcbjr"
+  
+before_script:
+  - pwd
+  - env
+stages:
+  - initialization
+  - Continuous_Integration
+  - Continuous_Deployment
+
+initialization:
+  stage: initialization
+  only:
+    refs:
+      - develop
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /^.*cicd.*$/
+      - $CI_COMMIT_TITLE =~ /^.*cicd.*$/
+      - $CI_COMMIT_DESCRIPTION =~ /^.*cicd.*$/
+      - $CI_COMMIT_MESSAGE =~ /^Merge branch.*$/
+      - $CI_COMMIT_TITLE =~ /^Merge branch.*$/
+      - $CI_COMMIT_DESCRIPTION =~ /^Merge branch.*$/
+  script:
+    - cp /home/cicd/$NAME_SPACE/01_initialization.sh .
+    - bash 01_initialization.sh
+
+Continuous_Integration:
+  stage: Continuous_Integration
+  only:
+    refs:
+      - develop
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /^.*cicd.*$/
+      - $CI_COMMIT_TITLE =~ /^.*cicd.*$/
+      - $CI_COMMIT_DESCRIPTION =~ /^.*cicd.*$/
+      - $CI_COMMIT_MESSAGE =~ /^Merge branch.*$/
+      - $CI_COMMIT_TITLE =~ /^Merge branch.*$/
+      - $CI_COMMIT_DESCRIPTION =~ /^Merge branch.*$/
+  script:
+    - cp /home/cicd/$NAME_SPACE/02_Continuous_Integration.sh .
+    - bash 02_Continuous_Integration.sh
+
+Continuous_Deployment:
+  stage: Continuous_Deployment
+  only:
+    refs:
+      - develop
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /^.*cicd.*$/
+      - $CI_COMMIT_TITLE =~ /^.*cicd.*$/
+      - $CI_COMMIT_DESCRIPTION =~ /^.*cicd.*$/
+      - $CI_COMMIT_MESSAGE =~ /^Merge branch.*$/
+      - $CI_COMMIT_TITLE =~ /^Merge branch.*$/
+      - $CI_COMMIT_DESCRIPTION =~ /^Merge branch.*$/
+  script:
+    - cp /home/cicd/$NAME_SPACE/03_Continuous_Deployment.sh .
+    - bash 03_Continuous_Deployment.sh
+
+

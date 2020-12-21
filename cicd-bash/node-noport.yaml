@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app_name
+  namespace: name_space
+  labels:
+    server: app_name-v1
+    app: app_name
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      server: app_name-v1
+      app: app_name
+  template:
+    metadata:
+      name: app_name-v1
+      labels:
+        server: app_name-v1
+        app: app_name
+        version: v1
+    spec:
+      imagePullSecrets:
+      - name: PullSecrets_NAME
+      containers:
+      - name: app_name
+        imagePullPolicy: Always
+        image: images:create_version
+        volumeMounts:
+        - name: app_name
+          mountPath: /opt/app/appsettings.Development.json
+          subPath: appsettings.Development.json
+      volumes:
+      - name: app_name
+        configMap:
+          name: app_name
+          items:
+            - key: appsettings.Development.json
+              path: appsettings.Development.json
