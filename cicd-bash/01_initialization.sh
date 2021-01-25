@@ -17,6 +17,7 @@ csproj_url=`find . -name $i.csproj`
   #定位csproj路径
   for url in $csproj_url
   do
+
     #判断是否存在ProjectGuid字段
     url_output=`cat  $url | grep ProjectGuid | wc -l`
     if [ $url_output == 0  ];then
