@@ -8,7 +8,6 @@ git checkout $branch
 git pull  origin/$branch
 
 #csproj初始化
-#date=`date`
 sln_url=`find . -name *.sln`
 app_name=`cat $sln_url | grep csproj |  awk '{print $3}' | cut -d \" -f 2`
 #echo "init_time $date" > app_name.txt

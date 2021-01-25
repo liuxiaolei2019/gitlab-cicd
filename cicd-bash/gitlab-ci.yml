@@ -1,18 +1,18 @@
 variables:
   #gitlab地址(master)
-  git_remote_url: "git@192.168.1.24:nbmetro/code/code_itps/itps.git"
+  git_remote_url: "git@xx.xx.xx.xx:nbmetro/code/code_itps/itps.git"
   #HARBOR服务器地址
-  HARBOR_URL: "harbor.lzgdjt.com:47038"
+  HARBOR_URL: "xx.xx.xx.xx:xx"
   #rancher访问地址
-  RANCHER_URL: "192.168.1.230"
+  RANCHER_URL: "xx.xx.xx.xx"
   #rancher令牌
   CATTLE_ACCESS_KEY: "token-24j5v"
   #rancher秘钥
   CATTLE_SECRET_KEY: "dmt4fzv95v5xz6bjs88rh8jksvwvfmmmqv67kz5tjgn5wl2j7gkq44"
   #项目程序的命名空间
-  NAME_SPACE: "old-nb-itps"
+  NAME_SPACE: "test"
   #镜像库凭证名称
-  imagePullSecrets_NAME: "lzharbor-nbitps"
+  imagePullSecrets_NAME: "test"
   #rancher项目ID，通常在项目的url中获取
   RANCHER_PROJECT_ID: "c-l2ccp:p-hcbjr"
   

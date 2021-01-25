@@ -2,7 +2,7 @@
 #最新提交更新模块
 branch="develop"
 app_sln_url=`find . -name *.sln | awk -F / '{print $2}'`
-updata_number=`git log origin/$branch --grep=".*cicd.*"  --pretty=format:"" --name-only  -1 |  grep -v "^$" | sed  s/"^"$app_sln_url"\///g"  | awk -F / '{print $1}' | uniq |grep -v 01-updataname.sh | grep -v 02-Sonarqube.sh | grep -v 03-docker-push.sh `
+updata_number=`git log origin/$branch --grep=".*cicd.*"  --pretty=format:"" --name-only  -1 |  grep -v "^$" | sed  s/"^"$app_sln_url"\///g"  | awk -F / '{print $1}' | uniq  `
 
 cicd_if=`git log --pretty="%s" -2 | grep -v "Merge branch" | uniq | egrep .*cicd.* | wc -l`
 if [[ $cicd_if == 0 ]];then
